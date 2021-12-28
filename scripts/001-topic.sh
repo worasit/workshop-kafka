@@ -1,3 +1,5 @@
+https://kafka.apache.org/documentation/#topicconfigs
+
 # Create a topic
 kafka-topics --bootstrap-server localhost:9092 --create \
              --topic learning.helloworld \
