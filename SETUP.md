@@ -22,6 +22,6 @@ brew services stop zookeeper
 zookeeper-server-start kafka_2.13-3.0.0/config/zookeeper.properties
 
 # Start Kafka's broker (new terminal)
-zookeeper-server-start kafka_2.13-3.0.0/config/zookeeper.properties 
+kafka-server-start kafka_2.13-3.0.0/config/server.properties 
 ```
 
