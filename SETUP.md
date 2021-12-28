@@ -25,3 +25,7 @@ zookeeper-server-start kafka_2.13-3.0.0/config/zookeeper.properties
 kafka-server-start kafka_2.13-3.0.0/config/server.properties 
 ```
 
+### Kafka UI
+
+- https://www.conduktor.io/download/
+- https://www.kafkatool.com/download.html
