@@ -25,10 +25,14 @@ public class ProducerCallbackWithKeyDemo {
         KafkaProducer<String, String> producer = new KafkaProducer<String, String>(producerProps);
 
         // Send data
-        for (int i = 0; i < 100; i++) {
+        for (int key = 0; key < 10; key++) {
             // Build a record
+            // id_1 => partition 0
+            // id_8 => partition 1
+            // id_2 => partition 2
+            String KEY = String.format("id_%d", 8);
             final String MESSAGE = "this is from java producer " + new Date();
-            ProducerRecord<String, String> record = new ProducerRecord<String, String>(TOPIC, MESSAGE);
+            ProducerRecord<String, String> record = new ProducerRecord<String, String>(TOPIC, KEY, MESSAGE);
             producer.send(record, new Callback() {
                 public void onCompletion(RecordMetadata recordMetadata, Exception e) {
                     if (e == null) {
