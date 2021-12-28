@@ -1,1 +1,1 @@
-# workshop-kafka
+# Workshop Kafka
