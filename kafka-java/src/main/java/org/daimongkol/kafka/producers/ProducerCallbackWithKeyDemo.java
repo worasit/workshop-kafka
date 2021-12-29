@@ -30,7 +30,7 @@ public class ProducerCallbackWithKeyDemo {
                 // id_1 => partition 0
                 // id_8 => partition 1
                 // id_2 => partition 2
-                String messageKey = String.format("id_%d", 8);
+                String messageKey = String.format("id_%d", 1);
                 final String MESSAGE = "this is from java producer " + new Date();
                 ProducerRecord<String, String> producerRecord = new ProducerRecord<>(TOPIC, messageKey, MESSAGE);
                 producer.send(producerRecord, (recordMetadata, e) -> {
