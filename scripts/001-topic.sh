@@ -1,4 +1,5 @@
 https://kafka.apache.org/documentation/#topicconfigs
+#ec2-34-198-46-219.compute-1.amazonaws.com
 
 # Create a topic
 kafka-topics --bootstrap-server localhost:9092 --create \
