@@ -1,4 +1,4 @@
-package org.daimongkol.kafka;
+package org.daimongkol.kafka.producers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.*;
@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Properties;
 
 @Slf4j
-public class ProducerCallbackWithKeyDemo {
+public class ProducerCallbackDemo {
 
     public static final String TOPIC = "learning.helloworld";
 
@@ -25,14 +25,10 @@ public class ProducerCallbackWithKeyDemo {
         KafkaProducer<String, String> producer = new KafkaProducer<String, String>(producerProps);
 
         // Send data
-        for (int key = 0; key < 10; key++) {
+        for (int i = 0; i < 100; i++) {
             // Build a record
-            // id_1 => partition 0
-            // id_8 => partition 1
-            // id_2 => partition 2
-            String KEY = String.format("id_%d", 8);
             final String MESSAGE = "this is from java producer " + new Date();
-            ProducerRecord<String, String> record = new ProducerRecord<String, String>(TOPIC, KEY, MESSAGE);
+            ProducerRecord<String, String> record = new ProducerRecord<String, String>(TOPIC, MESSAGE);
             producer.send(record, new Callback() {
                 public void onCompletion(RecordMetadata recordMetadata, Exception e) {
                     if (e == null) {

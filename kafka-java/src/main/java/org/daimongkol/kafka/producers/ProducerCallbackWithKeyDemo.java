@@ -1,4 +1,4 @@
-package org.daimongkol.kafka;
+package org.daimongkol.kafka.producers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.*;
@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Properties;
 
 @Slf4j
-public class ProducerCallbackDemo {
+public class ProducerCallbackWithKeyDemo {
 
     public static final String TOPIC = "learning.helloworld";
 
@@ -22,15 +22,18 @@ public class ProducerCallbackDemo {
         producerProps.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
         // Create producer
-        KafkaProducer<String, String> producer = new KafkaProducer<String, String>(producerProps);
+        try (KafkaProducer<String, String> producer = new KafkaProducer<>(producerProps)) {
 
-        // Send data
-        for (int i = 0; i < 100; i++) {
-            // Build a record
-            final String MESSAGE = "this is from java producer " + new Date();
-            ProducerRecord<String, String> record = new ProducerRecord<String, String>(TOPIC, MESSAGE);
-            producer.send(record, new Callback() {
-                public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+            // Send data
+            for (int key = 0; key < 10; key++) {
+                // Build a producerRecord
+                // id_1 => partition 0
+                // id_8 => partition 1
+                // id_2 => partition 2
+                String messageKey = String.format("id_%d", 8);
+                final String MESSAGE = "this is from java producer " + new Date();
+                ProducerRecord<String, String> producerRecord = new ProducerRecord<>(TOPIC, messageKey, MESSAGE);
+                producer.send(producerRecord, (recordMetadata, e) -> {
                     if (e == null) {
                         log.info("topic: " + recordMetadata.topic());
                         log.info("partition: " + recordMetadata.partition());
@@ -39,14 +42,13 @@ public class ProducerCallbackDemo {
                     } else {
                         log.error("Error while producing", e);
                     }
-                }
-            });
+                });
 
-            Thread.sleep(1000);
+                Thread.sleep(1000);
+            }
+
+            producer.flush();
         }
-
-        producer.flush();
-        producer.close();
 
     }
 }

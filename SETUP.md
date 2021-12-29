@@ -29,3 +29,4 @@ kafka-server-start kafka_2.13-3.0.0/config/server.properties
 
 - https://www.conduktor.io/download/
 - https://www.kafkatool.com/download.html
+- https://github.com/vran-dev/PrettyZoo
