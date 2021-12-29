@@ -32,12 +32,13 @@ public class ConsumerDemo {
         consumer.subscribe(Collections.singletonList(TOPIC));
 
         while (true) {
-            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(500));
-            records.forEach(record -> {
-                log.info("topic: " + record.topic());
-                log.info("partition: " + String.valueOf(record.partition()));
-                log.info("key: " + record.key());
-                log.info("value: " + record.value());
+            ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofMillis(500));
+            consumerRecords.forEach(consumerRecord -> {
+                log.info("topic: " + consumerRecord.topic());
+                log.info("offset: " + consumerRecord.offset());
+                log.info("partition: " + consumerRecord.partition());
+                log.info("key: " + consumerRecord.key());
+                log.info("value: " + consumerRecord.value());
             });
         }
     }

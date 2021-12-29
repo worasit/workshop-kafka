@@ -35,6 +35,7 @@ public class ConsumerGroupsDemoSecond {
             ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofMillis(500));
             consumerRecords.forEach(consumerRecord -> {
                 log.info("topic: " + consumerRecord.topic());
+                log.info("offset: " + consumerRecord.offset());
                 log.info("partition: " + consumerRecord.partition());
                 log.info("key: " + consumerRecord.key());
                 log.info("value: " + consumerRecord.value());
