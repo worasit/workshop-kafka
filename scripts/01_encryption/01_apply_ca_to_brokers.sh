@@ -61,7 +61,35 @@ keytool -keystore kafka.server.keystore.jks \
 keytool -list -v -keystore kafka.server.keystore.jks
 
 #2.) Configure brokers to use SSL on the specific ports
-sudo grep "EndPoint" /home/ubuntu/kafka/logs/server.log
+# use the server01.properties as an example
 
 #3.) Test SSL encryption
-openssl s_client -connect ec2-34-205-162-147.compute-1.amazonaws.com:8092
+openssl s_client -connect ec2-54-158-166-68.compute-1.amazonaws.com:8092
+
+# if a connect is failed to establish, please make sure the in-bound rules has been configured properly.
+
+# Expected result
+#CONNECTED(00000005)
+#4435783340:error:1400410B:SSL routines:CONNECT_CR_SRVR_HELLO:wrong version number:/System/Volumes/Data/SWE/macOS/BuildRoots/2288acc43c/Library/Caches/com.apple.xbs/Sources/libressl/libressl-56.60.2/libressl-2.8/ssl/ssl_pkt.c:386:
+#---
+#no peer certificate available
+#---
+#No client certificate CA names sent
+#---
+#SSL handshake has read 5 bytes and written 0 bytes
+#---
+#New, (NONE), Cipher is (NONE)
+#Secure Renegotiation IS NOT supported
+#Compression: NONE
+#Expansion: NONE
+#No ALPN negotiated
+#SSL-Session:
+#    Protocol  : TLSv1.2
+#    Cipher    : 0000
+#    Session-ID:
+#    Session-ID-ctx:
+#    Master-Key:
+#    Start Time: 1641193340
+#    Timeout   : 7200 (sec)
+#    Verify return code: 0 (ok)
+#---
