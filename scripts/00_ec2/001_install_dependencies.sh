@@ -7,14 +7,12 @@ tar -xzf kafka_2.13-3.0.0.tgz
 ln -s kafka_2.13-3.0.0 kafka
 
 # Start Zookeeper
-kafka/bin/zookeeper-server-start.sh -daemon kafka/config/zookeeper.properties
-tail -n 20 ~/kafka/logs/zookeeper.out
+sudo kafka/bin/zookeeper-server-start.sh -daemon kafka/config/zookeeper.properties
+sudo tail -n 20 ~/kafka/logs/zookeeper.out
 
 # Validate connection
 telnet localhost 2181
 
 # Start Kafka's broker
-kafka/bin/kafka-server-start.sh -daemon kafka/config/server.properties
-tail -n 20 ~/kafka/logs/kafkaServer.out
-
-
+sudo kafka/bin/kafka-server-start.sh kafka/config/server01.properties
+sudo tail -n 20 -f ~/kafka/logs/kafkaServer.out
