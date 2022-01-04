@@ -25,6 +25,7 @@ public class ConsumerGroupsDemoSecond {
         consumerProps.setProperty(ConsumerConfig.GROUP_ID_CONFIG, CONSUMER_GROUP_ID);
         consumerProps.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
+
         // Create a consumer
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(consumerProps);
 
